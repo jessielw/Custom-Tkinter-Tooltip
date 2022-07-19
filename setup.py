@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-tool_version = '1.2'
+tool_version = '1.3'
 short_description = "Basic Hover Tooltip for Tkinter based off of Tkinter's built in tooltip"
 long_description = "This package enables a customizable tooltip when you hover the mouse over a defined widget. " \
                    "It's built off of the Tkinter's built in Hovertip class. However it has most of the " \
