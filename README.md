@@ -3,6 +3,7 @@ Basic Hover Tooltip for Tkinter based off of Tkinter's built in tooltip with the
 
 ## Install:
 `pip install --upgrade Custom-Tooltip`
+*https://pypi.org/project/Custom-Tooltip/*
 
 ## Uninstall:
 `pip uninstall Custom-Tooltip`
