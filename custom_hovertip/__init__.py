@@ -1,1 +1,1 @@
-from .tkinter_tooltip import CustomTkinterTooltip
+from .tkinter_tooltip import CustomTooltipLabel
