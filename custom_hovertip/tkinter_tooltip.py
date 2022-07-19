@@ -4,7 +4,7 @@ This includes:
  * an abstract base-class for different kinds of tooltips
  * a simple text-only Tooltip class
 """
-from tkinter import Toplevel, TclError, Label, LEFT, SOLID, Button
+from tkinter import *
 
 
 class TooltipBase:
@@ -104,7 +104,7 @@ class OnHoverTooltipBase(TooltipBase):
         try:
             self.anchor_widget.unbind("<Enter>", self._id1)
             self.anchor_widget.unbind("<Leave>", self._id2)  # pragma: no cover
-            self.anchor_widget.unbind("<Button>", self._id3) # pragma: no cover
+            self.anchor_widget.unbind("<Button>", self._id3)  # pragma: no cover
         except TclError:
             pass
         super(OnHoverTooltipBase, self).__del__()
@@ -141,50 +141,48 @@ class OnHoverTooltipBase(TooltipBase):
             pass
         super(OnHoverTooltipBase, self).hidetip()
 
+class CustomTooltipLabel(OnHoverTooltipBase):
+    """Hover tip for the label widget"""
 
-class CustomTkinterTooltip(OnHoverTooltipBase):
-    "A tooltip that pops up when a mouse hovers over an anchor widget."
-
-    def __init__(self, anchor_widget, text, hover_delay=1000, background="#ffffe0", foreground="black", cust_font=None):
-        """Create a text tooltip with a mouse hover delay.
-
-        anchor_widget: the widget next to which the tooltip will be shown
-        hover_delay: time to delay before showing the tooltip, in milliseconds
-
-        Note that a widget will only be shown when showtip() is called,
-        e.g. after hovering over the anchor widget with the mouse for enough
-        time.
-        """
-        super(CustomTkinterTooltip, self).__init__(anchor_widget, hover_delay=hover_delay)
+    def __init__(self, anchor_widget: Widget, text, hover_delay: int = 800, justify=LEFT, background="#ffffe0",
+                 foreground="black", relief=SOLID, font=None, wraplength: int = None, anchor=None, border=2,
+                 width: int = None, textvariable=None):
+        super(CustomTooltipLabel, self).__init__(anchor_widget=anchor_widget, hover_delay=hover_delay)
         self.text = text
+        self.justify = justify
         self.background = background
         self.foreground = foreground
-        self.cust_font = cust_font
+        self.relief = relief
+        self.font = font
+        self.wraplength = wraplength
+        self.anchor = anchor
+        self.border = border
+        self.width = width
+        self.textvariable = textvariable
 
     def showcontents(self):
-        label = Label(self.tipwindow, text=self.text, justify=LEFT, foreground=self.foreground,
-                      background=self.background, relief=SOLID, borderwidth=2, font=self.cust_font)
+        label = Label(self.tipwindow, text=self.text, justify=self.justify, foreground=self.foreground,
+                      background=self.background, relief=self.relief, font=self.font,
+                      wraplength=self.wraplength, anchor=self.anchor, border=self.border,
+                      width=self.width, textvariable=self.textvariable)
         label.pack()
 
 
-def _tooltip(parent):  # htest #
-    top = Toplevel(parent)
-    top.title("Test tooltip")
-    x, y = map(int, parent.geometry().split('+')[1:])
-    top.geometry("+%d+%d" % (x, y + 150))
+def example_window():
+    """Tkinter root window for testing tool tips"""
+    top = Tk()
+    top.title("Test Custom Tooltip")
     label = Label(top, text="Place your mouse over buttons")
     label.pack()
-    button1 = Button(top, text="Button 1 -- 1/2 second hover delay")
+    button1 = Button(top, text="Button 1")
     button1.pack()
-    CustomTkinterTooltip(button1, "This is tooltip text for button1.", hover_delay=500)
-    button2 = Button(top, text="Button 2 -- no hover delay")
+    CustomTooltipLabel(anchor_widget=button1, text="This is tooltip text for button1.")
+    button2 = Button(top, text="Button 2")
     button2.pack()
-    CustomTkinterTooltip(button2, "This is tooltip\ntext for button2.", hover_delay=None)
+    CustomTooltipLabel(anchor_widget=button2, text="This is tooltip\ntext for button2.", background="grey",
+                       foreground="black", width=15, justify=CENTER)
+    top.mainloop()
 
 
 if __name__ == '__main__':
-    from unittest import main
-    main('idlelib.idle_test.test_tooltip', verbosity=2, exit=False)
-
-    from idlelib.idle_test.htest import run
-    run(_tooltip)
+    example_window()
