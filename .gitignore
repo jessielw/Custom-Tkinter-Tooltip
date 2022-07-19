@@ -1,3 +1,7 @@
 .idea/
 __pycache__/
 *.bin
+Custom_Tooltip.egg-info/
+build/
+dist/
+*.bat
