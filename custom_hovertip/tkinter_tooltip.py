@@ -30,6 +30,7 @@ class TooltipBase:
         self.tipwindow = tw = Toplevel(self.anchor_widget)
         # show no border on the top level window
         tw.wm_overrideredirect(1)
+        tw.attributes('-topmost', True)
         try:
             # This command is only needed and available on Tk >= 8.4.0 for OSX.
             # Without it, call tips intrude on the typing process by grabbing
