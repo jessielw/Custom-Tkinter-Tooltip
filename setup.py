@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-tool_version = '1.3'
+tool_version = '1.4'
 short_description = "Basic Hover Tooltip for Tkinter based off of Tkinter's built in tooltip"
 long_description = "This package enables a customizable tooltip when you hover the mouse over a defined widget. " \
                    "It's built off of the Tkinter's built in Hovertip class. However it has most of the " \
@@ -20,4 +20,4 @@ setup(
     install_requires=[],
     url='https://github.com/jlw4049/Custom-Tkinter-Tooltip',
     keywords=['python', 'tkinter', 'hovertip', 'tooltip', 'infotip', 'bubble'],
-    classifiers=["Programming Language :: Python :: 3.8", 'Development Status :: 6 - Mature'])
+    classifiers=["Programming Language :: Python :: 3.6", 'Development Status :: 6 - Mature'])
