@@ -5,3 +5,5 @@ Custom_Tooltip.egg-info/
 build/
 dist/
 *.bat
+.pypirc
+example_upload_pypi.txt
